@@ -35,6 +35,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
         color = "waiting..."
         counting_mode = "..."
         width_heigh_taken = True
+        i =0 
         with detection_graph.as_default():
           with tf.Session(graph=detection_graph) as sess:
             # Definite input and output Tensors for detection_graph
@@ -69,9 +70,9 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
 
                 # insert information text to video frame
                 font = cv2.FONT_HERSHEY_SIMPLEX
-
+                i += 1    
                 # Visualization of the results of a detection.        
-                counter, csv_line, counting_mode = vis_util.visualize_boxes_and_labels_on_image_array_x_axis(cap.get(1),
+                counter, csv_line, counting_mode = vis_util.visualize_boxes_and_labels_on_image_array_x_axis(i,
                                                                                                              input_frame,
                                                                                                              1,
                                                                                                              is_color_recognition_enabled,
@@ -118,6 +119,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                     )
 
                 output_movie.write(input_frame)
+                cv2.imshow('frame', input_frame)
                 print ("writing frame")
                 #cv2.imshow('object counting',input_frame)
 
